@@ -6,9 +6,9 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 
+	"github.com/Sang-it/handy-man-api/configs/database"
 	"github.com/Sang-it/handy-man-api/configs/environment"
 	"github.com/Sang-it/handy-man-api/generated"
-	"github.com/Sang-it/handy-man-api/modules/common"
 	handyman "github.com/Sang-it/handy-man-api/modules/handy-man"
 	"github.com/Sang-it/handy-man-api/resolvers"
 	"github.com/rs/cors"
@@ -24,7 +24,7 @@ func main() {
 		AllowedOrigins: []string{"http://localhost:3000"},
 	})
 
-	db := common.Init()
+	db := database.Init()
 	migrate(db)
 
 	server := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &resolvers.Resolver{}}))
