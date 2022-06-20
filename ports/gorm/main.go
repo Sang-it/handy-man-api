@@ -1,4 +1,4 @@
-package database
+package gorm
 
 import (
 	"fmt"
@@ -7,15 +7,19 @@ import (
 	"gorm.io/gorm"
 )
 
-type Database struct {
-	*gorm.DB
+type Database struct{}
+
+type DatabaseActions interface {
+	CreateHandyManInDB(name string)
+	AutoMigrate(model ...interface{})
+	Init() *gorm.DB
 }
 
 var (
 	DB *gorm.DB
 )
 
-func Init() *gorm.DB {
+func (d *Database) Init() *gorm.DB {
 	db, err := gorm.Open(postgres.Open(environment.Get("CONNECTION_STRING")), &gorm.Config{})
 	if err != nil {
 		fmt.Println("db err: (Init) ", err)
@@ -24,6 +28,14 @@ func Init() *gorm.DB {
 	return DB
 }
 
+func (d *Database) AutoMigrate(model ...interface{}) {
+	DB.AutoMigrate(model)
+}
+
 func GetDB() *gorm.DB {
 	return DB
+}
+
+func GetDatabaseAdapter() DatabaseActions {
+	return &Database{}
 }

@@ -6,3 +6,7 @@ type User {
 input CreateUserInput {
   username: String
 }
+
+extend type Mutation {
+  createUser(input: CreateUserInput): User
+}
