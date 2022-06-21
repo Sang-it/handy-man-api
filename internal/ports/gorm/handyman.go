@@ -1,7 +1,7 @@
 package gorm
 
 import (
-	"github.com/Sang-it/handy-man-api/modules/handy-man"
+	"github.com/Sang-it/handy-man-api/internal/core/handy-man"
 )
 
 func (d *Database) CreateHandyManInDB(name string) {

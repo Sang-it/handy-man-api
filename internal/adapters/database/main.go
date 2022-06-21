@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/Sang-it/handy-man-api/ports/gorm"
+	"github.com/Sang-it/handy-man-api/internal/ports/gorm"
 )
 
 func GetDatabaseAdapter() gorm.DatabaseActions {

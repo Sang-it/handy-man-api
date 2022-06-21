@@ -1,14 +1,14 @@
 schema:
-- ./schemas/*.graphql
+- ./internal/ports/graphql/schemas/*.graphql
 
 exec:
-  filename: generated/exec.go
+  filename: internal/ports/graphql/generated/exec.go
 
 model:
-  filename: graphql-types/generated.go
+  filename: internal/ports/graphql/generated/types.go
 
 resolver:
   layout: follow-schema
-  dir: ports/graphql
+  dir: internal/ports/graphql/resolvers
   package: resolvers
   filename_template: "{name}.resolvers.go"

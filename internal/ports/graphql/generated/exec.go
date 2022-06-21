@@ -12,7 +12,6 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
-	graphql_types "github.com/Sang-it/handy-man-api/graphql-types"
 	gqlparser "github.com/vektah/gqlparser/v2"
 	"github.com/vektah/gqlparser/v2/ast"
 )
@@ -44,7 +43,7 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Mutation struct {
-		CreateUser func(childComplexity int, input *graphql_types.CreateUserInput) int
+		CreateUser func(childComplexity int, input *CreateUserInput) int
 		Hello      func(childComplexity int, name string) int
 	}
 
@@ -60,7 +59,7 @@ type ComplexityRoot struct {
 
 type MutationResolver interface {
 	Hello(ctx context.Context, name string) (string, error)
-	CreateUser(ctx context.Context, input *graphql_types.CreateUserInput) (*graphql_types.User, error)
+	CreateUser(ctx context.Context, input *CreateUserInput) (*User, error)
 }
 type QueryResolver interface {
 	Hi(ctx context.Context, name string) (*string, error)
@@ -91,7 +90,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateUser(childComplexity, args["input"].(*graphql_types.CreateUserInput)), true
+		return e.complexity.Mutation.CreateUser(childComplexity, args["input"].(*CreateUserInput)), true
 
 	case "Mutation.hello":
 		if e.complexity.Mutation.Hello == nil {
@@ -231,10 +230,10 @@ var parsedSchema = gqlparser.MustLoadSchema(sources...)
 func (ec *executionContext) field_Mutation_createUser_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *graphql_types.CreateUserInput
+	var arg0 *CreateUserInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
-		arg0, err = ec.unmarshalOCreateUserInput2ᚖgithubᚗcomᚋSangᚑitᚋhandyᚑmanᚑapiᚋgraphqlᚑtypesᚐCreateUserInput(ctx, tmp)
+		arg0, err = ec.unmarshalOCreateUserInput2ᚖgithubᚗcomᚋSangᚑitᚋhandyᚑmanᚑapiᚋinternalᚋportsᚋgraphqlᚋgeneratedᚐCreateUserInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -395,7 +394,7 @@ func (ec *executionContext) _Mutation_createUser(ctx context.Context, field grap
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateUser(rctx, fc.Args["input"].(*graphql_types.CreateUserInput))
+		return ec.resolvers.Mutation().CreateUser(rctx, fc.Args["input"].(*CreateUserInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -404,9 +403,9 @@ func (ec *executionContext) _Mutation_createUser(ctx context.Context, field grap
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*graphql_types.User)
+	res := resTmp.(*User)
 	fc.Result = res
-	return ec.marshalOUser2ᚖgithubᚗcomᚋSangᚑitᚋhandyᚑmanᚑapiᚋgraphqlᚑtypesᚐUser(ctx, field.Selections, res)
+	return ec.marshalOUser2ᚖgithubᚗcomᚋSangᚑitᚋhandyᚑmanᚑapiᚋinternalᚋportsᚋgraphqlᚋgeneratedᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Mutation_createUser(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -620,7 +619,7 @@ func (ec *executionContext) fieldContext_Query___schema(ctx context.Context, fie
 	return fc, nil
 }
 
-func (ec *executionContext) _User_id(ctx context.Context, field graphql.CollectedField, obj *graphql_types.User) (ret graphql.Marshaler) {
+func (ec *executionContext) _User_id(ctx context.Context, field graphql.CollectedField, obj *User) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_User_id(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -664,7 +663,7 @@ func (ec *executionContext) fieldContext_User_id(ctx context.Context, field grap
 	return fc, nil
 }
 
-func (ec *executionContext) _User_username(ctx context.Context, field graphql.CollectedField, obj *graphql_types.User) (ret graphql.Marshaler) {
+func (ec *executionContext) _User_username(ctx context.Context, field graphql.CollectedField, obj *User) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_User_username(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -2481,8 +2480,8 @@ func (ec *executionContext) fieldContext___Type_specifiedByURL(ctx context.Conte
 
 // region    **************************** input.gotpl *****************************
 
-func (ec *executionContext) unmarshalInputCreateUserInput(ctx context.Context, obj interface{}) (graphql_types.CreateUserInput, error) {
-	var it graphql_types.CreateUserInput
+func (ec *executionContext) unmarshalInputCreateUserInput(ctx context.Context, obj interface{}) (CreateUserInput, error) {
+	var it CreateUserInput
 	asMap := map[string]interface{}{}
 	for k, v := range obj.(map[string]interface{}) {
 		asMap[k] = v
@@ -2621,7 +2620,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 
 var userImplementors = []string{"User"}
 
-func (ec *executionContext) _User(ctx context.Context, sel ast.SelectionSet, obj *graphql_types.User) graphql.Marshaler {
+func (ec *executionContext) _User(ctx context.Context, sel ast.SelectionSet, obj *User) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, userImplementors)
 	out := graphql.NewFieldSet(fields)
 	var invalids uint32
@@ -3296,7 +3295,7 @@ func (ec *executionContext) marshalOBoolean2ᚖbool(ctx context.Context, sel ast
 	return res
 }
 
-func (ec *executionContext) unmarshalOCreateUserInput2ᚖgithubᚗcomᚋSangᚑitᚋhandyᚑmanᚑapiᚋgraphqlᚑtypesᚐCreateUserInput(ctx context.Context, v interface{}) (*graphql_types.CreateUserInput, error) {
+func (ec *executionContext) unmarshalOCreateUserInput2ᚖgithubᚗcomᚋSangᚑitᚋhandyᚑmanᚑapiᚋinternalᚋportsᚋgraphqlᚋgeneratedᚐCreateUserInput(ctx context.Context, v interface{}) (*CreateUserInput, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -3320,7 +3319,7 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	return res
 }
 
-func (ec *executionContext) marshalOUser2ᚖgithubᚗcomᚋSangᚑitᚋhandyᚑmanᚑapiᚋgraphqlᚑtypesᚐUser(ctx context.Context, sel ast.SelectionSet, v *graphql_types.User) graphql.Marshaler {
+func (ec *executionContext) marshalOUser2ᚖgithubᚗcomᚋSangᚑitᚋhandyᚑmanᚑapiᚋinternalᚋportsᚋgraphqlᚋgeneratedᚐUser(ctx context.Context, sel ast.SelectionSet, v *User) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}

@@ -11,7 +11,7 @@ type Database struct{}
 
 type DatabaseActions interface {
 	CreateHandyManInDB(name string)
-	AutoMigrate(model ...interface{})
+	Migrate(model ...interface{})
 	Init() *gorm.DB
 }
 
@@ -28,7 +28,7 @@ func (d *Database) Init() *gorm.DB {
 	return DB
 }
 
-func (d *Database) AutoMigrate(model ...interface{}) {
+func (d *Database) Migrate(model ...interface{}) {
 	DB.AutoMigrate(model)
 }
 
