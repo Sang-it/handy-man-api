@@ -6,7 +6,7 @@ package resolvers
 import (
 	"context"
 
-	"github.com/Sang-it/handy-man-api/internal/ports/graphql/generated"
+	generated1 "github.com/Sang-it/handy-man-api/internal-new/adapters/framework/left/graphql/generated"
 )
 
 func (r *queryResolver) Hi(ctx context.Context, name string) (*string, error) {
@@ -14,7 +14,7 @@ func (r *queryResolver) Hi(ctx context.Context, name string) (*string, error) {
 	return &result, nil
 }
 
-// Query returns generated.QueryResolver implementation.
-func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
+// Query returns generated1.QueryResolver implementation.
+func (r *Resolver) Query() generated1.QueryResolver { return &queryResolver{r} }
 
 type queryResolver struct{ *Resolver }

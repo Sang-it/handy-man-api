@@ -1,0 +1,12 @@
+type User {
+  id: ID!
+  username: String!
+}
+
+input CreateUserInput {
+  username: String
+}
+
+extend type Mutation {
+  createUser(input: CreateUserInput): User
+}

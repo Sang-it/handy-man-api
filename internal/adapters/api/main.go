@@ -1,15 +1,16 @@
 package api
 
 import (
+	"log"
+	"net/http"
+
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/Sang-it/handy-man-api/configs/environment"
 	"github.com/Sang-it/handy-man-api/internal/adapters/database"
-	"github.com/Sang-it/handy-man-api/internal/core/handy-man"
+	handyman "github.com/Sang-it/handy-man-api/internal/core/handy-man"
 	"github.com/Sang-it/handy-man-api/internal/ports/graphql/generated"
 	"github.com/Sang-it/handy-man-api/internal/ports/graphql/resolvers"
 	"github.com/rs/cors"
-	"log"
-	"net/http"
 )
 
 func Start() {
